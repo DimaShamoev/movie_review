@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return inertia('Home');
-});
+Route::get('/', [TestController::class, 'showIndex'])->name('home');
