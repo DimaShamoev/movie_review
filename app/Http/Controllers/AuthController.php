@@ -10,6 +10,14 @@ use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController {
+
+    public function showSingInPage() {
+        return inertia('SignIn');
+    }
+
+    public function showSingUpPage() {
+        return inertia('SignUp');
+    }
     
     public function user() {
         return Auth::user();
@@ -23,14 +31,14 @@ class AuthController {
             'password' => $request->input('password'),
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('home_page');
     }
 
     public function login(Request $request) {
         $credentials = request(['email', 'password']);
 
         if (Auth::guard('web')->attempt($credentials)) {
-            return redirect()->route('home');
+            return redirect()->route('home_page');
         }
         
         return response([

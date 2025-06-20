@@ -1,15 +1,22 @@
 import { IoMenu } from "react-icons/io5";
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
+import { useAuth } from '../../hooks/useAuth';
+import { FaUser } from "react-icons/fa";
+import { Link } from "@inertiajs/react";
+import { route } from "ziggy-js";
 
 const Header = () => {
 
-    const isAuth = false;
+    const { user, isAuth } = useAuth()
 
     return (
         <header className="bg-[#222] padding-box">
             <div className="header-wrapper container flex items-center gap-10">
-                <div className="logo flex items-center gap-2.5">
+                <Link
+                    href="/"
+                    className="logo flex items-center gap-2.5"
+                >
                     <img
                         className="w-[30px] sm:w-[50px]"
                         src="images/web/logo.png"
@@ -20,7 +27,7 @@ const Header = () => {
                     >
                         Movie Review
                     </span>
-                </div>
+                </Link>
 
                 <div className="search flex-1 relative">
                     <div className="search-input">
@@ -38,14 +45,17 @@ const Header = () => {
                 </div>
 
                 <div className="header-btns flex items-center justify-between gap-4">
-                    <div className="watchlist flex items-center gap-1">
+                    <Link
+                        href=''
+                        className="watchlist flex items-center gap-1"
+                    >
                         <BsBookmarkPlusFill
                             className="text-xl"
                         />
                         <span>Watchlist</span>
-                    </div>
+                    </Link>
 
-                    <div className="menu-btn flex items-center gap-1">
+                    <div className="menu-btn flex items-center gap-1 cursor-pointer">
                         <IoMenu
                             className="text-2xl"
                         />
@@ -54,9 +64,9 @@ const Header = () => {
 
                     <div className="auth-section">
                         { isAuth ? (
-                            User
+                            <Link href="" className="flex items-center gap-1"><FaUser /> { user.first_name }</Link>
                         ) : (
-                            <a href="">Sign Up</a>
+                            <Link href={route('sign_up_page')}>Sign Up</Link>
                         ) }  
                     </div>
 

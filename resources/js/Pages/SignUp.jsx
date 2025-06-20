@@ -1,4 +1,4 @@
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa6";
 import { route } from "ziggy-js";
@@ -71,6 +71,14 @@ const SignUp = () => {
                     />
                     {errors.password && <div className="text-red-600">{errors.password}</div>}
                 </div>
+                <div className="sign-in-redirect text-right">
+                    <Link
+                        href={route('sign_in_page')}
+                        className="text-xs underline"
+                    >
+                        Already Have An Account?
+                    </Link>
+                </div>
                 <div className="submit-btn input-user-info max-w-[600px] w-full">
                     <button
                         className="w-full bg-yellow-300 text-black p-1 cursor-pointer rounded-sm"
@@ -85,12 +93,12 @@ const SignUp = () => {
                 <div className="auth-methods">
                     <ul className="flex flex-col gap-4">
                         <li
-                            className="flex items-center w-full justify-center border-2 p-2 rounded-full cursor-pointer"
+                            className="flex gap-2 items-center w-full justify-center border-2 p-2 rounded-full cursor-pointer"
                         >
                             <FaGoogle /> Sign Up With Google
                         </li>
                         <li
-                            className="flex items-center w-full justify-center border-2 p-2 rounded-full cursor-pointer"
+                            className="flex gap-2 items-center w-full justify-center border-2 p-2 rounded-full cursor-pointer"
                         >
                             <FaFacebookF /> Sign Up With Facebook
                         </li>

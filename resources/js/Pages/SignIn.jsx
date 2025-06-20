@@ -1,4 +1,4 @@
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa6";
 import { route } from "ziggy-js";
@@ -47,6 +47,14 @@ const SignUp = () => {
                         name="password"
                     />
                     {errors.password && <div className="text-red-600">{errors.password}</div>}
+                </div>
+                <div className="sign-in-redirect text-right">
+                    <Link
+                        href={route('sign_up_page')}
+                        className="text-xs underline"
+                    >
+                        Don't Have An Account?
+                    </Link>
                 </div>
                 <div className="submit-btn input-user-info max-w-[600px] w-full">
                     <button
