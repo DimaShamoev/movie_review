@@ -7,13 +7,11 @@ import { Link } from "@inertiajs/react";
 import { route } from "ziggy-js";
 import { useAside } from "../../hooks/useAside";
 import { useAuth } from '../../hooks/useAuth';
-import { useMainMenu } from "../../hooks/useMainMenu";
 
 const Header = () => {
 
     const { user, isAuth } = useAuth()
-    const { toggleMenu: toggleMainMenu } = useMainMenu();
-    const { toggleMenu: toggleAsideMenu } = useAside();
+    const { toggleMenu } = useAside();
 
     return (
         <header className="bg-[#222] padding-box">
@@ -61,7 +59,7 @@ const Header = () => {
                     </Link>
 
                     <div
-                        onClick={toggleMainMenu}
+                        onClick={toggleMenu}
                         className="menu-btn flex items-center gap-1 cursor-pointer"
                     >
                         <IoMenu
@@ -85,7 +83,7 @@ const Header = () => {
                     </div>
 
                     <div
-                        onClick={toggleAsideMenu}
+                        onClick={toggleMenu}
                         className="aside-menu-btn flex items-center gap-1"
                     >
                         <IoMenu
