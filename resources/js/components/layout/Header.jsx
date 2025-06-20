@@ -1,14 +1,19 @@
 import { IoMenu } from "react-icons/io5";
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
-import { useAuth } from '../../hooks/useAuth';
 import { FaUser } from "react-icons/fa";
+
 import { Link } from "@inertiajs/react";
 import { route } from "ziggy-js";
+import { useAside } from "../../hooks/useAside";
+import { useAuth } from '../../hooks/useAuth';
+import { useMainMenu } from "../../hooks/useMainMenu";
 
 const Header = () => {
 
     const { user, isAuth } = useAuth()
+    const { toggleMenu: toggleMainMenu } = useMainMenu();
+    const { toggleMenu: toggleAsideMenu } = useAside();
 
     return (
         <header className="bg-[#222] padding-box">
@@ -55,7 +60,10 @@ const Header = () => {
                         <span>Watchlist</span>
                     </Link>
 
-                    <div className="menu-btn flex items-center gap-1 cursor-pointer">
+                    <div
+                        onClick={toggleMainMenu}
+                        className="menu-btn flex items-center gap-1 cursor-pointer"
+                    >
                         <IoMenu
                             className="text-2xl"
                         />
@@ -76,7 +84,10 @@ const Header = () => {
                         />
                     </div>
 
-                    <div className="aside-menu-btn flex items-center gap-1">
+                    <div
+                        onClick={toggleAsideMenu}
+                        className="aside-menu-btn flex items-center gap-1"
+                    >
                         <IoMenu
                             className="text-2xl"
                         />

@@ -1,8 +1,13 @@
+import { useAside } from "../hooks/useAside"
+import { useMainMenu } from "../hooks/useMainMenu"
+
 const Home = () => {
 
-    return (
-        <div className="home container padding-box">
+    const { isMenuOpen } = useMainMenu()
 
+    return (
+        <div>
+            <p>{ String(isMenuOpen) }</p>
         </div>
     )
 }

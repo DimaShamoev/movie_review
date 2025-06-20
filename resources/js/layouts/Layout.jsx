@@ -1,17 +1,23 @@
-import React from 'react'
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
+import { AsideProvider } from '../context/AsideContext'
+import { MainMenuProvider } from '../context/MainMenuContext'
 
 const Layout = ({ children }) => {
     return (
         <div className='flex flex-col min-h-screen'>
-            <Header />
+            <AsideProvider>
+                <MainMenuProvider>
 
-            <main className="main flex-1">
-                { children }
-            </main>
+                    <Header />
 
-            <Footer />
+                    <main className="main flex-1">
+                        { children }
+                    </main>
+
+                    <Footer />
+                </MainMenuProvider>
+            </AsideProvider>
         </div>
     )
 }
