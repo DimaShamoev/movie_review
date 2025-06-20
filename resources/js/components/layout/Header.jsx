@@ -11,28 +11,30 @@ const Header = () => {
             <div className="header-wrapper container flex items-center gap-10">
                 <div className="logo flex items-center gap-2.5">
                     <img
-                        className="w-[50px]"
+                        className="w-[30px] sm:w-[50px]"
                         src="images/web/logo.png"
                         alt="Logo" 
                     />
                     <span
-                        className="text-3xl font-bold"
+                        className="text-md font-bold sm:text-3xl"
                     >
                         Movie Review
                     </span>
                 </div>
 
                 <div className="search flex-1 relative">
-                    <input
-                        type="text"
-                        placeholder="search"
-                        className="w-full border bg-white rounded-md pl-3 pr-8 py-1 text-black outline-none"
-                    />
-                    <span>
-                        <GoSearch
-                            className="absolute right-[10px] top-[50%] translate-y-[-50%] text-black"
+                    <div className="search-input">
+                        <input
+                            type="text"
+                            placeholder="search"
+                            className="w-full border bg-white rounded-md pl-3 pr-8 py-1 text-black outline-none"
                         />
-                    </span>
+                        <span>
+                            <GoSearch
+                                className="absolute right-[10px] top-[50%] translate-y-[-50%] text-black"
+                            />
+                        </span>
+                    </div>
                 </div>
 
                 <div className="header-btns flex items-center justify-between gap-4">
@@ -49,6 +51,7 @@ const Header = () => {
                         />
                         <span>Menu</span>
                     </div>
+
                     <div className="auth-section">
                         { isAuth ? (
                             User
@@ -56,11 +59,19 @@ const Header = () => {
                             <a href="">Sign Up</a>
                         ) }  
                     </div>
+
+                    <div className="search-icon">
+                        <GoSearch
+                            className="text-white"
+                        />
+                    </div>
+
                     <div className="aside-menu-btn flex items-center gap-1">
                         <IoMenu
                             className="text-2xl"
                         />
                     </div>
+
                 </div>
             </div>
         </header>

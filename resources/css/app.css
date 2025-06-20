@@ -1,11 +1,13 @@
 @import 'tailwindcss';
 
+/* General */
 body {
     font-family: cursive;
     background-color: #121212;
     color: white;
 }
 
+/* Custom divs */
 .container {
     max-width: 1550px;
     width: 100%;
@@ -16,9 +18,39 @@ body {
     padding: 10px 30px;
 }
 
-.aside-menu-btn {
+.line {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    cursor: default;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 45%;
+        height: 1px;
+        background-color: white;
+        top: 50%;
+        left: 0;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 45%;
+        height: 1px;
+        background-color: white;
+        top: 50%;
+        right: 0;
+    }
+}
+
+/* header */
+.aside-menu-btn,
+.search-icon {
     display: none;
 }
+
 
 @media screen and (max-width: 1000px) {
     .padding-box {
@@ -26,12 +58,22 @@ body {
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
+    .watchlist,
+    .menu-btn,
+    .auth-section {
+        display: none;
+    }
     .aside-menu-btn {
         display: flex;
     }
+}
 
-    .menu-btn {
+@media screen and (max-width: 500px) {
+    .search-input {
         display: none;
+    }
+    .search-icon {
+        display: flex;
     }
 }
