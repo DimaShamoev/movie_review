@@ -2,18 +2,25 @@ import { Link, useForm } from "@inertiajs/react";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa6";
 import { route } from "ziggy-js";
+import { useAuth } from '../hooks/useAuth'
 
-const SignUp = () => {
+const SignIn = () => {
 
     const { setData, post, errors, processing } = useForm({
         email: '',
         password: ''
     })
 
+    const { isAuth } = useAuth()
+
     const handelRegistration = (event) => {
         event.preventDefault();
 
         post(route('login_user'))
+    }
+
+    if (isAuth) {
+        window.location.href = '/'
     }
 
     return (
@@ -87,4 +94,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default SignIn

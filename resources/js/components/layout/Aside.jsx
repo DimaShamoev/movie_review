@@ -7,6 +7,7 @@ import { FaUser } from "react-icons/fa";
 
 import { Link } from "@inertiajs/react";
 import { useAside } from "../../hooks/useAside";
+import { route } from "ziggy-js";
 
 const Aside = () => {
 
@@ -80,7 +81,7 @@ const Aside = () => {
                         </li>
                         <li>
                             <Link
-                                href=""
+                                href={route('profile_page')}
                                 className="flex items-center transition-colors duration-200 ease-linear gap-1.5 hover:bg-black hover:text-white p-1 rounded-md"
                                 onClick={toggleMenu}
                             >

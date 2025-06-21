@@ -2,6 +2,7 @@ import { Link, useForm } from "@inertiajs/react";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa6";
 import { route } from "ziggy-js";
+import { useAuth } from "../hooks/useAuth";
 
 const SignUp = () => {
 
@@ -12,10 +13,16 @@ const SignUp = () => {
         password: ''
     })
 
+    const { isAuth } = useAuth()
+
     const handelRegistration = (event) => {
         event.preventDefault();
 
         post(route('register_user'))
+    }
+
+    if (isAuth) {
+        window.location.href = '/'
     }
 
     return (

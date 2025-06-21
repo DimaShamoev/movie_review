@@ -49,7 +49,7 @@ const Header = () => {
 
                 <div className="header-btns flex items-center justify-between gap-4">
                     <Link
-                        href=''
+                        href={route('watchlist_page')}
                         className="watchlist flex items-center gap-1"
                     >
                         <BsBookmarkPlusFill
@@ -70,7 +70,7 @@ const Header = () => {
 
                     <div className="auth-section">
                         { isAuth ? (
-                            <Link href="" className="flex items-center gap-1"><FaUser /> { user.first_name }</Link>
+                            <Link href={route('profile_page')} className="flex items-center gap-1"><FaUser /> { user.first_name }</Link>
                         ) : (
                             <Link href={route('sign_up_page')}>Sign Up</Link>
                         ) }  
