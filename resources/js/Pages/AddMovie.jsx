@@ -10,7 +10,8 @@ const AddMovie = () => {
         movie_duration:  "",
         movie_director:  "",
         movie_cover_image:  [],
-        movie_release_date:  ""
+        movie_release_date:  "",
+        trailer_link: ""
     })
 
     const { isAuth, user } = useAuth()
@@ -56,6 +57,15 @@ const AddMovie = () => {
                         className="border-2 w-full p-1 outline-none rounded-sm h-28"
                         name="movie_description"
                         onChange={(e) => setData('movie_description', e.target.value)}
+                    />
+                </div>
+                <div className="input-block input-user-info max-w-[600px] w-full">
+                    <input
+                        type="text"
+                        placeholder="Movie Trailer"
+                        className="border-2 w-full p-1 outline-none rounded-sm"
+                        name="trailer_link"
+                        onChange={(e) => setData('trailer_link', e.target.value)}
                     />
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full">

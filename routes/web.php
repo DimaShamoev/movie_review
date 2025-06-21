@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 // Home Page
 Route::get('/', [HomeController::class, 'showHomePage'])->name('home_page');
+
 // Admins
 Route::get('/add-movie', [MoviesController::class, 'showAddPage'])->name('add_movie_page');
 Route::post('/create/movie', [MoviesController::class, 'createMovie'])->name('post_movie');
@@ -19,7 +20,7 @@ Route::get('/sign-in', [AuthController::class, 'showSingInPage'])->name('sign_in
 Route::get('/sign-up', [AuthController::class, 'showSingUpPage'])->name('sign_up_page');
 
 // Watchlist
-Route::get('/watchlist', [WatchlistController::class, 'showWatchlistPage'])->name('watchlist_page');
+Route::get('/watchlist/{user_id}', [WatchlistController::class, 'userWatchlist'])->name('user_watchlist');
 Route::post('/watchlist/add/{id}', [WatchlistController::class, 'addToWatchlist'])->name('add_watchlist');
 
 
@@ -34,6 +35,6 @@ Route::prefix('/auth')->group(function() {
 // Single Data Page
 Route::get('/movie/{id}', [MoviesController::class, 'movieInfo'])->name('about_movie');
 
+// Movies
+Route::post('/comment/create/{movie_id}', [MoviesController::class, 'movieComment'])->name('movie_comment');
 
-
-Route::get('/watchlist/{user_id}', [WatchlistController::class, 'userWatchlist'])->name('user_watchlist');
