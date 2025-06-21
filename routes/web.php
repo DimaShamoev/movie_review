@@ -7,16 +7,23 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchlistController;
 use Illuminate\Support\Facades\Route;
 
-
+// Home Page
 Route::get('/', [HomeController::class, 'showHomePage'])->name('home_page');
-Route::get('/watchlist', [WatchlistController::class, 'showWatchlistPage'])->name('watchlist_page');
-Route::get('/profile', [ProfileController::class, 'showProfilePage'])->name('profile_page');
+// Admins
 Route::get('/add-movie', [MoviesController::class, 'showAddPage'])->name('add_movie_page');
+Route::post('/create/movie', [MoviesController::class, 'createMovie'])->name('post_movie');
 
+// User
+Route::get('/profile', [ProfileController::class, 'showProfilePage'])->name('profile_page');
 Route::get('/sign-in', [AuthController::class, 'showSingInPage'])->name('sign_in_page');
 Route::get('/sign-up', [AuthController::class, 'showSingUpPage'])->name('sign_up_page');
 
+// Watchlist
+Route::get('/watchlist', [WatchlistController::class, 'showWatchlistPage'])->name('watchlist_page');
+Route::post('/watchlist/add/{id}', [WatchlistController::class, 'addToWatchlist'])->name('add_watchlist');
 
+
+// Auth
 Route::prefix('/auth')->group(function() {
     Route::get('/user', [AuthController::class, 'user'])->name('user');
     Route::post('/register', [AuthController::class, 'register'])->name('register_user');
@@ -24,4 +31,9 @@ Route::prefix('/auth')->group(function() {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout_user');
 });
 
-Route::post('/create/movie', [MoviesController::class, 'createMovie'])->name('post_movie');
+// Single Data Page
+Route::get('/movie/{id}', [MoviesController::class, 'movieInfo'])->name('about_movie');
+
+
+
+Route::get('/watchlist/{user_id}', [WatchlistController::class, 'userWatchlist'])->name('user_watchlist');

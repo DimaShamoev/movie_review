@@ -17,4 +17,8 @@ class Movie extends Model {
 
     protected $hidden = [];
 
+    public function movieWatchlist() {
+        return $this->hasMany(Watchlist::class);
+    }
+
 }

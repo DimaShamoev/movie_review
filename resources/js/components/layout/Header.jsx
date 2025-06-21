@@ -48,15 +48,29 @@ const Header = () => {
                 </div>
 
                 <div className="header-btns flex items-center justify-between gap-4">
-                    <Link
-                        href={route('watchlist_page')}
-                        className="watchlist flex items-center gap-1"
-                    >
-                        <BsBookmarkPlusFill
-                            className="text-xl"
-                        />
-                        <span>Watchlist</span>
-                    </Link>
+                    <div className="watchlist-section">
+                        { isAuth ? (
+                            <Link
+                                href={route('user_watchlist', user.id)}
+                                className="watchlist flex items-center gap-1"
+                            >
+                                <BsBookmarkPlusFill
+                                    className="text-xl"
+                                />
+                                <span>Watchlist</span>
+                            </Link>
+                        ) : (
+                            <Link
+                                href={route('sign_up_page')}
+                                className="watchlist flex items-center gap-1"
+                            >
+                                <BsBookmarkPlusFill
+                                    className="text-xl"
+                                />
+                                <span>Watchlist</span>
+                            </Link>
+                        ) }
+                    </div>
 
                     <div
                         onClick={toggleMenu}

@@ -53,9 +53,7 @@ class AuthController {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response([
-            'message' => 'Logged out successfully'
-        ]);
+        return Inertia::render('Home');
     }
 
 }

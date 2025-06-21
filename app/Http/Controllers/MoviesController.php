@@ -36,4 +36,10 @@ class MoviesController {
         return redirect('/');
     }
 
+    public function movieInfo($id) {
+        $movie = Movie::find($id);
+
+        return Inertia::render('MovieInfo', ['movie' => $movie]);
+    }
+
 }
