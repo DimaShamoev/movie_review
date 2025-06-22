@@ -26,4 +26,8 @@ class Movie extends Model {
         return $this->hasMany(Comment::class);
     }
 
+    public function movieLike() {
+        return $this->hasMany(Like::class);
+    }
+
 }

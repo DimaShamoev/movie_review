@@ -4,22 +4,26 @@ import { FaCommentAlt } from "react-icons/fa";
 import { PiImageBrokenBold } from "react-icons/pi";
 import { route } from "ziggy-js";
 
-const MovieInfo = ({ movie, comments }) => {
+const MovieInfo = ({ movie, comments, likes }) => {
 
-    const { post, setData } = useForm({
+    const { data, post, setData } = useForm({
         comment: ''
     })
 
-    console.log(comments)
+    console.log(likes)
 
     const handleComment = (event, movie_id) => {
         event.preventDefault()
         post(route('movie_comment', movie_id))
+        setData('comment', '')
+    }
+
+    const handleMovieLike = (event, movie_id) => {
+        event.preventDefault()
+        post(route('like_movie', movie_id))
     }
 
     const images = JSON.parse(movie.movie_cover_image || '[]');
-
-    const isLiked = false
 
     return (
         <div className='movie-info padding-box'>
@@ -47,13 +51,23 @@ const MovieInfo = ({ movie, comments }) => {
 
                 <div className="reactions-section flex items-center gap-5">
                     <div className="likes-btn">
+                        <form
+                            onSubmit={(e) => handleMovieLike(e, movie.id)}
+                            className="flex items-center gap-1.5"
+                        >
+                            <button type="submit">
+                                <BiLike
+                                    className="text-2xl"
+                                />
+                            </button>
+                            <span>{ likes.length }</span>
+                        </form>
                         
-                        { isLiked ? (
+                        {/* { isLiked ? (
                             <div className="like-btn-wrap flex items-center gap-1.5">
                                 <BiSolidLike
                                     className="text-2xl"
                                 />
-                                <span>0</span>
                             </div>
                         ) : (
                             <div className="like-btn-wrap flex items-center gap-1.5">
@@ -62,14 +76,14 @@ const MovieInfo = ({ movie, comments }) => {
                                 />
                                 <span>1</span>
                             </div>
-                        )}
+                        )} */}
                     </div>
 
                     <div className="comments-block flex items-center gap-1.5">
                         <FaCommentAlt
                             className="text-xl"
                         />
-                        <span>1</span>
+                        <span>{ comments.length }</span>
                     </div>
                 </div>
 
@@ -101,6 +115,7 @@ const MovieInfo = ({ movie, comments }) => {
                                 placeholder="Leave Your Comment"
                                 className="w-full outline-none"
                                 onChange={(e) => setData('comment', e.target.value)}
+                                value={data.comment}
                             />
                         </div>
                         <button
@@ -120,7 +135,7 @@ const MovieInfo = ({ movie, comments }) => {
                                     <p
                                         className="text-xs text-gray-500"
                                     >
-                                        <span>{ comment.user.email }</span> • <span>{ new Date(comment.created_at).toLocaleTimeString() }</span>
+                                        <span>{ comment.user.email }</span> • <span>{ new Date(comment.created_at).toLocaleDateString() }</span>
                                     </p>
                                     <p
                                         className="text-lg"

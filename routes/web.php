@@ -38,3 +38,6 @@ Route::get('/movie/{id}', [MoviesController::class, 'movieInfo'])->name('about_m
 // Movies
 Route::post('/comment/create/{movie_id}', [MoviesController::class, 'movieComment'])->name('movie_comment');
 
+
+
+Route::post('/movie/like/{movie_id}', [MoviesController::class, 'movieLike'])->name('like_movie');
