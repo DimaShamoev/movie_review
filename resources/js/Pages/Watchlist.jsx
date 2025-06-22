@@ -1,7 +1,7 @@
 import { IoAddOutline } from "react-icons/io5";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
-import { Link, useForm } from "@inertiajs/react"
+import { Link } from "@inertiajs/react"
 import { route } from "ziggy-js";
 
 const Watchlist = ({ watchlist }) => {

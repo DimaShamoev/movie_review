@@ -53,7 +53,7 @@ class AuthController {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Inertia::render('Home');
+        return redirect('/');
     }
 
 }
