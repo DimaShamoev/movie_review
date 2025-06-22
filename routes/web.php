@@ -41,3 +41,4 @@ Route::post('/comment/create/{movie_id}', [MoviesController::class, 'movieCommen
 
 
 Route::post('/movie/like/{movie_id}', [MoviesController::class, 'movieLike'])->name('like_movie');
+Route::post('/movie/comment/like/{comment_id}', [MoviesController::class, 'commentLike'])->name('like_comment');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\LikeComment;
 use App\Models\Movie;
 use Auth;
 use Illuminate\Http\Request;
@@ -50,10 +51,16 @@ class MoviesController
         $comments = Comment::where('movie_id', $id)->with('user')->get();
         $likes = Like::where('movie_id', $id)->with('user')->get();
 
+        $commentIds = Comment::where('movie_id', $id)->pluck('id');
+        $commentLikes = LikeComment::whereIn('comment_id', $commentIds)
+        ->with('user')
+        ->get();
+
         return Inertia::render('MovieInfo', [
             'movie' => $movie,
             'comments' => $comments,
-            'likes' => $likes
+            'likes' => $likes,
+            'commentLikes' => $commentLikes
         ]);
     }
 
@@ -72,13 +79,10 @@ class MoviesController
         return redirect()->back();
     }
 
-    public function movieLike($movie_id)
-    {
+    public function movieLike($movie_id) {
         $user = Auth::user();
 
-        $likeExist = Like::where('user_id', $user->id)
-            ->where('movie_id', $movie_id)
-            ->first();
+        $likeExist = Like::where('user_id', $user->id)->where('movie_id', $movie_id)->first();
 
         if (!$likeExist) {
             Like::create([
@@ -92,5 +96,20 @@ class MoviesController
         return;
     }
 
+
+    public function commentLike($comment_id) {
+        $user = Auth::user();
+
+        $commentLikeExist = LikeComment::where('user_id', $user->id)->where('comment_id', $comment_id)->first();
+
+        if (!$commentLikeExist) {
+            LikeComment::create([
+                'user_id' => $user->id,
+                'comment_id' => $comment_id
+            ]);
+        } else {
+            $commentLikeExist->delete();
+        }
+    }
 
 }

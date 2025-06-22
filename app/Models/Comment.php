@@ -20,4 +20,8 @@ class Comment extends Model {
         return $this->belongsTo(Movie::class);
     }
 
+    public function likedComment() {
+        return $this->hasMany(LikeComment::class);
+    }
+
 }

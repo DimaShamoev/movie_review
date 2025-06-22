@@ -1,16 +1,16 @@
 import { useForm } from "@inertiajs/react";
-import { BiLike, BiSolidLike } from "react-icons/bi";
+import { BiLike } from "react-icons/bi";
 import { FaCommentAlt } from "react-icons/fa";
 import { PiImageBrokenBold } from "react-icons/pi";
 import { route } from "ziggy-js";
 
-const MovieInfo = ({ movie, comments, likes }) => {
+const MovieInfo = ({ movie, comments, likes, commentLikes }) => {
 
     const { data, post, setData } = useForm({
         comment: ''
     })
 
-    console.log(likes)
+    console.log(commentLikes)
 
     const handleComment = (event, movie_id) => {
         event.preventDefault()
@@ -21,6 +21,11 @@ const MovieInfo = ({ movie, comments, likes }) => {
     const handleMovieLike = (event, movie_id) => {
         event.preventDefault()
         post(route('like_movie', movie_id))
+    }
+
+    const handleCommentLike = (event, comment_id) => {
+        event.preventDefault()
+        post(route('like_comment', comment_id))
     }
 
     const images = JSON.parse(movie.movie_cover_image || '[]');
@@ -62,21 +67,6 @@ const MovieInfo = ({ movie, comments, likes }) => {
                             </button>
                             <span>{ likes.length }</span>
                         </form>
-                        
-                        {/* { isLiked ? (
-                            <div className="like-btn-wrap flex items-center gap-1.5">
-                                <BiSolidLike
-                                    className="text-2xl"
-                                />
-                            </div>
-                        ) : (
-                            <div className="like-btn-wrap flex items-center gap-1.5">
-                                <BiLike
-                                    className="text-2xl"
-                                />
-                                <span>1</span>
-                            </div>
-                        )} */}
                     </div>
 
                     <div className="comments-block flex items-center gap-1.5">
@@ -142,6 +132,17 @@ const MovieInfo = ({ movie, comments, likes }) => {
                                     >
                                         { comment.comment }
                                     </p>
+                                    <div className="like-section">
+                                        <form
+                                            onSubmit={(e) => handleCommentLike(e, comment.id)}
+                                            className="flex items-center gap-1.5 text-sm"
+                                        >
+                                            <button type="submit">
+                                                <BiLike />
+                                            </button>
+                                            {commentLikes.filter(like => like.comment_id === comment.id).length}
+                                        </form>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
