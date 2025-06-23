@@ -4,6 +4,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { Link, useForm } from "@inertiajs/react"
 import { route } from "ziggy-js"
 import { useAuth } from '../hooks/useAuth'
+import MovieUi from "../components/UI/MovieUi";
 
 const Profile = ({ user, watchlists }) => {
 
@@ -19,7 +20,7 @@ const Profile = ({ user, watchlists }) => {
         window.location.href = route('sign_up_page')
     }
 
-    console.log(watchlists)
+    // console.log(watchlists)
 
     return (
         <div className="profile padding-box">
@@ -49,51 +50,9 @@ const Profile = ({ user, watchlists }) => {
 
                 <div className="latest-watchlist">
                     <div className="latest-watchlist flex gap-5 flex-wrap items-center">
-                        {watchlists.map((watchlist) => {
-                            const movie = watchlist.movie;
-                            const coverImages = JSON.parse(movie.movie_cover_image || '[]');
-                            
-                            return (
-                                <div
-                                key={watchlist.id}
-                                className="max-w-[200px] w-full flex flex-col bg-[#1A1A1A] rounded-lg"
-                                >
-                                    <div className="movie-banner overflow-hidden">
-                                        <img
-                                            src={`/storage/${coverImages[0] || ""}`}
-                                            alt={movie.movie_title || ""}
-                                            className="h-[200px] w-[200px]"
-                                        />
-                                    </div>
-
-                                    <div className="movie-info p-4 flex flex-col gap-6">
-                                        <div className="title">
-                                            <p>{movie.movie_title}</p>
-                                        </div>
-
-                                        <div className="add-watchlist text-center w-full bg-[#2C2C2C] p-1 rounded-full hover:bg-[#30353C]">
-                                            <Link
-                                                onClick={() => handleAddWatchlist(movie.id)}
-                                                className="text-blue-500 flex items-center justify-around"
-                                            >
-                                                Add To Watchlist
-                                                <IoAddOutline className="text-2xl font" />
-                                            </Link>
-                                        </div>
-
-                                        <div className="more-info">
-                                            <Link
-                                                href={route("about_movie", movie.id)}
-                                                className="flex items-center justify-between"
-                                            >
-                                                See Full Detail
-                                                <IoMdInformationCircleOutline className="text-2xl" />
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                        {watchlists.map((watchlist) => (
+                            <MovieUi key={watchlist.id} watchlist={watchlist} />
+                        ))}
                     </div>
                 </div>
 

@@ -14,7 +14,7 @@ const Header = () => {
     const { toggleMenu } = useAside();
 
     return (
-        <header className="bg-[#222] padding-box">
+        <header className="bg-[#222] padding-box sticky top-0 z-[1] shadow-gray-900 shadow-2xl">
             <div className="header-wrapper container flex items-center gap-10">
                 <Link
                     href="/"
@@ -101,7 +101,7 @@ const Header = () => {
                         className="aside-menu-btn flex items-center gap-1"
                     >
                         <IoMenu
-                            className="text-2xl"
+                            className="text-2xl cursor-pointer"
                         />
                     </div>
 

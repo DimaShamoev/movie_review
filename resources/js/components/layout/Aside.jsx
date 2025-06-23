@@ -15,11 +15,11 @@ const Aside = () => {
 
     return (
         <div
-            className={`overlay fixed bg-black/70 transition-all duration-200 ${isMenuOpen ? 'inset-0' : ''}`}
+            className={`overlay fixed bg-black/70 z-[2] transition-all duration-200 ${isMenuOpen ? 'inset-0' : ''}`}
         >
 
             <aside
-                className={`flex flex-col gap-7 fixed top-0 bottom-0 max-w-[320px] w-full text-black bg-gray-200 z-[1] p-5 transition-all duration-200 ${isMenuOpen ? 'right-0' : 'right-[-320px]'}`}
+                className={`flex flex-col gap-7 fixed top-0 bottom-0 overflow-auto max-w-[320px] w-full text-black bg-gray-200 z-[1] p-5 transition-all duration-200 ${isMenuOpen ? 'right-0' : 'right-[-320px]'}`}
             >
                 
                 <div className="exit-btn flex justify-end">

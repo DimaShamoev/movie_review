@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
             <AsideProvider>
                 <Header />
                 <Aside />
-                <main className="main flex-1">
+                <main className="main flex-1 relative">
                     {children}
                 </main>
 
