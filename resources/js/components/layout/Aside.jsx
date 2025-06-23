@@ -106,7 +106,7 @@ const Aside = () => {
                     >
                         <img
                             className="w-[30px] sm:w-[50px]"
-                            src="images/web/logo.png"
+                            src="/images/web/logo.png"
                             alt="Logo" 
                         />
                         <span
