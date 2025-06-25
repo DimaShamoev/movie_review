@@ -20,7 +20,6 @@ const Profile = ({ user, watchlists }) => {
         window.location.href = route('sign_up_page')
     }
 
-    // console.log(watchlists)
 
     return (
         <div className="profile padding-box">

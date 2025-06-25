@@ -37,7 +37,7 @@ const SignUp = () => {
                     Sign Up
                 </div>
                 <div className="input-user-info max-w-[600px] w-full grid grid-cols-2 gap-2">
-                    <div className="input-block">
+                    <div className="input-block flex flex-col gap-1">
                         <input
                             type="text"
                             placeholder="First Name"
@@ -45,9 +45,9 @@ const SignUp = () => {
                             onChange={(e) => setData('first_name', e.target.value)}
                             name="first_name"
                         />
-                        {errors.first_name && <div className="text-red-600">{errors.first_name}</div>}
+                        {errors.first_name && <div className="text-xs text-red-600">{errors.first_name}</div>}
                     </div>
-                    <div className="input-block">
+                    <div className="input-block flex flex-col gap-1">
                         <input
                             type="text"
                             placeholder="Last Name"
@@ -55,10 +55,10 @@ const SignUp = () => {
                             onChange={(e) => setData('last_name', e.target.value)}
                             name="last_name"
                         />
-                        {errors.last_name && <div className="text-red-600">{errors.last_name}</div>}
+                        {errors.last_name && <div className="text-xs text-red-600">{errors.last_name}</div>}
                     </div>
                 </div>
-                <div className="input-block input-user-info max-w-[600px] w-full">
+                <div className="input-block input-user-info max-w-[600px] w-full  flex flex-col gap-1">
                     <input
                         type="text"
                         placeholder="Email Address"
@@ -66,9 +66,9 @@ const SignUp = () => {
                         onChange={(e) => setData('email', e.target.value)}
                         name="email"
                     />
-                    {errors.email && <div className="text-red-600">{errors.email}</div>}
+                    {errors.email && <div className="text-xs text-red-600">{errors.email}</div>}
                 </div>
-                <div className="input-block input-user-info max-w-[600px] w-full">
+                <div className="input-block input-user-info max-w-[600px] w-full  flex flex-col gap-1">
                     <input
                         type="text"
                         placeholder="Password"
@@ -76,7 +76,7 @@ const SignUp = () => {
                         onChange={(e) => setData('password', e.target.value)}
                         name="password"
                     />
-                    {errors.password && <div className="text-red-600">{errors.password}</div>}
+                    {errors.password && <div className="text-xs text-red-600">{errors.password}</div>}
                 </div>
                 <div className="sign-in-redirect text-right">
                     <Link

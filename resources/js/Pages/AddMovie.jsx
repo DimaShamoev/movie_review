@@ -7,17 +7,17 @@ const AddMovie = () => {
     const { setData, errors, processing, post } = useForm({
         movie_title: "",
         movie_description: "",
-        movie_duration:  "",
-        movie_director:  "",
-        movie_cover_image:  [],
-        movie_release_date:  "",
+        movie_duration: "",
+        movie_director: "",
+        movie_cover_image: [],
+        movie_release_date: "",
         trailer_link: ""
     })
 
     const { isAuth, user } = useAuth()
 
-    if (isAuth && !user.is_admin == 0 || !isAuth) {
-        return window.location.href = '/' // add error component
+    if (!isAuth || (isAuth && user.is_admin === 0)) {
+        return window.location.href = '/'
     }
 
     const handleMoviePost = (event) => {
@@ -27,7 +27,7 @@ const AddMovie = () => {
             forceFormData: true
         })
     }
-    
+
     return (
         <div className="container padding-box min-h-[80vh] flex items-center justify-center">
             <form
@@ -40,7 +40,7 @@ const AddMovie = () => {
                 <div className="form-title text-center text-3xl">
                     Upload A New Movie
                 </div>
-                
+
                 <div className="input-block input-user-info max-w-[600px] w-full">
                     <input
                         type="text"
@@ -49,6 +49,7 @@ const AddMovie = () => {
                         name="movie_title"
                         onChange={(e) => setData('movie_title', e.target.value)}
                     />
+                    {errors.movie_title && <div className="text-red-600 text-xs">{errors.movie_title}</div>}
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full">
                     <textarea
@@ -58,6 +59,7 @@ const AddMovie = () => {
                         name="movie_description"
                         onChange={(e) => setData('movie_description', e.target.value)}
                     />
+                    {errors.movie_description && <div className="text-red-600 text-xs">{errors.movie_description}</div>}
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full">
                     <input
@@ -67,6 +69,7 @@ const AddMovie = () => {
                         name="trailer_link"
                         onChange={(e) => setData('trailer_link', e.target.value)}
                     />
+                    {errors.trailer_link && <div className="text-red-600 text-xs">{errors.trailer_link}</div>}
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full">
                     <input
@@ -76,6 +79,7 @@ const AddMovie = () => {
                         name="movie_duration"
                         onChange={(e) => setData('movie_duration', e.target.value)}
                     />
+                    {errors.movie_duration && <div className="text-red-600 text-xs">{errors.movie_duration}</div>}
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full">
                     <input
@@ -85,6 +89,7 @@ const AddMovie = () => {
                         name="movie_director"
                         onChange={(e) => setData('movie_director', e.target.value)}
                     />
+                    {errors.movie_director && <div className="text-red-600 text-xs">{errors.movie_director}</div>}
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full">
                     <input
@@ -93,6 +98,7 @@ const AddMovie = () => {
                         name="movie_release_date"
                         onChange={(e) => setData('movie_release_date', e.target.value)}
                     />
+                    {errors.movie_release_date && <div className="text-red-600 text-xs">{errors.movie_release_date}</div>}
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full flex items-center cursor-pointer">
                     <label htmlFor="movie_cover" className='max-w-[100px] w-full h-full border-2 p-1 border-r-0 rounded-l-md'>Upload File</label>
@@ -104,10 +110,12 @@ const AddMovie = () => {
                         id="movie_cover"
                         onChange={(e) => setData('movie_cover_image', e.target.files)}
                     />
+                    {errors.movie_cover_image && <div className="text-red-600 text-xs">{errors.movie_cover_image}</div>}
                 </div>
                 <div className="submit-btn input-user-info max-w-[600px] w-full">
                     <button
                         className="w-full bg-yellow-300 text-black p-1 cursor-pointer rounded-sm"
+                        disabled={processing}
                     >
                         Upload Movie
                     </button>

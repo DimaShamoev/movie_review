@@ -1,5 +1,5 @@
 import { IoClose } from "react-icons/io5";
-import { MdLocalMovies } from "react-icons/md";
+import { MdLibraryAdd, MdLocalMovies } from "react-icons/md";
 import { FaTv } from "react-icons/fa";
 import { PiVideoFill } from "react-icons/pi";
 import { IoPeopleSharp } from "react-icons/io5";
@@ -8,14 +8,19 @@ import { FaUser } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
 import { useAside } from "../../hooks/useAside";
 import { route } from "ziggy-js";
+import { useAuth } from "../../hooks/useAuth";
 
 const Aside = () => {
 
     const { isMenuOpen, toggleMenu } = useAside()
 
+    const { isAuth, user } = useAuth()
+
+    const isAdmin = user?.is_admin !== 0 ? true : false
+
     return (
         <div
-            className={`overlay fixed bg-black/70 z-[2] transition-all duration-200 ${isMenuOpen ? 'inset-0' : ''}`}
+            className={`overlay fixed bg-black/70 z-[11] transition-all duration-200 ${isMenuOpen ? 'inset-0' : ''}`}
         >
 
             <aside
@@ -91,6 +96,20 @@ const Aside = () => {
                                 <span className="text-xl">Profile</span>
                             </Link>
                         </li>
+                        {isAuth && isAdmin && (
+                            <li>
+                                <Link
+                                    href={route('add_movie_page')}
+                                    className="flex items-center transition-colors duration-200 ease-linear gap-1.5 hover:bg-black hover:text-white p-1 rounded-md"
+                                    onClick={toggleMenu}
+                                >
+                                    <MdLibraryAdd
+                                        className="text-2xl"
+                                    />
+                                    <span className="text-xl">Add Movie</span>
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
 

@@ -22,6 +22,16 @@ class MoviesController
     public function createMovie(Request $request)
     {
 
+        $validated = $request->validate([
+        'movie_title' => 'required|string|max:255',
+        'movie_description' => 'required|string',
+        'movie_duration' => 'required|integer|min:1',
+        'movie_director' => 'required|string|max:255',
+        'movie_cover_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+        'movie_release_date' => 'required|date',
+        'trailer_link' => 'nullable|url|max:255',
+    ]);
+
         $imagePaths = [];
 
         if ($request->hasFile('movie_cover_image')) {
@@ -32,13 +42,13 @@ class MoviesController
         }
 
         $movie = Movie::create([
-            'movie_title' => $request->input('movie_title'),
-            'movie_description' => $request->input('movie_description'),
-            'movie_duration' => $request->input('movie_duration'),
-            'movie_director' => $request->input('movie_director'),
+            'movie_title' => $validated['movie_title'],
+            'movie_description' => $validated['movie_description'],
+            'movie_duration' => $validated['movie_duration'],
+            'movie_director' => $validated['movie_director'],
             'movie_cover_image' => json_encode($imagePaths),
-            'movie_release_date' => $request->input('movie_release_date'),
-            'trailer_link' => $request->input('trailer_link')
+            'movie_release_date' => $validated['movie_release_date'],
+            'trailer_link' => $validated['trailer_link'],
         ]);
 
 

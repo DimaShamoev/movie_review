@@ -35,7 +35,7 @@ const SignIn = () => {
                     Sign In
                 </div>
                 
-                <div className="input-block input-user-info max-w-[600px] w-full">
+                <div className="input-block input-user-info max-w-[600px] w-full flex flex-col gap-1">
                     <input
                         type="text"
                         placeholder="Email Address"
@@ -43,9 +43,9 @@ const SignIn = () => {
                         onChange={(e) => setData('email', e.target.value)}
                         name="email"
                     />
-                    {errors.email && <div className="text-red-600">{errors.email}</div>}
+                    {errors.email && <div className="text-xs text-red-600">{errors.email}</div>}
                 </div>
-                <div className="input-block input-user-info max-w-[600px] w-full">
+                <div className="input-block input-user-info max-w-[600px] w-full flex flex-col gap-1">
                     <input
                         type="text"
                         placeholder="Password"
@@ -53,7 +53,7 @@ const SignIn = () => {
                         onChange={(e) => setData('password', e.target.value)}
                         name="password"
                     />
-                    {errors.password && <div className="text-red-600">{errors.password}</div>}
+                    {errors.password && <div className="text-xs text-red-600">{errors.password}</div>}
                 </div>
                 <div className="sign-in-redirect text-right">
                     <Link
