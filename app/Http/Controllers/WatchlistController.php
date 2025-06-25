@@ -23,7 +23,7 @@ class WatchlistController {
             ]);
         }
 
-        return back()->with('message', 'Movie Was added');
+        return redirect('/');
 
     }
 
@@ -31,5 +31,16 @@ class WatchlistController {
         $watchlist = Watchlist::where('user_id',  $user_id)->with('movie')->get();
 
         return inertia('Watchlist', ['watchlist' => $watchlist]);
+    }
+
+    public function removeWatchlist($movie_id) {
+        $user = Auth::user();
+        $isWatchlisted = Watchlist::where('user_id', $user->id)->where('movie_id', $movie_id    )->first();
+
+        if ($isWatchlisted) {
+            $isWatchlisted->delete();
+        }
+
+        return redirect()->back();
     }
 }

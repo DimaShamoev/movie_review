@@ -22,6 +22,7 @@ Route::get('/sign-up', [AuthController::class, 'showSingUpPage'])->name('sign_up
 // Watchlist
 Route::get('/watchlist/{user_id}', [WatchlistController::class, 'userWatchlist'])->name('user_watchlist');
 Route::post('/watchlist/add/{id}', [WatchlistController::class, 'addToWatchlist'])->name('add_watchlist');
+Route::delete('/watchlist/delete/{id}', [WatchlistController::class, 'removeWatchlist'])->name('remove_watchlist');
 
 
 // Auth

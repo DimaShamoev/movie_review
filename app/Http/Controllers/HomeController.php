@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class HomeController {
     
     public function showHomePage() {
-        return inertia('Home', ['movies' => Movie::all()]);
+        $movies = Movie::with('movieWatchlist')->get();
+
+        return inertia('Home', ['movies' => $movies]);
     }
 
 }

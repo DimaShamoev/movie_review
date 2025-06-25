@@ -1,22 +1,30 @@
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { IoAddOutline } from "react-icons/io5";
 
-import { Link } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { useAuth } from '../../hooks/useAuth'
 import { route } from "ziggy-js";
 
 const MovieUi = ({ watchlist }) => {
 
     const { isAuth } = useAuth()
+    const { delete: remove } = useForm()
 
     const movie = watchlist.movie;
 
     let coverImages = [];
+
     try {
         coverImages = JSON.parse(movie.movie_cover_image);
     } catch {
         coverImages = [];
     }
+
+
+    const handleRemoveWatchlist = (e, id) => {
+        e.preventDefault();
+        remove(route('remove_watchlist', id));
+    };
 
     return (
         <div
@@ -37,23 +45,14 @@ const MovieUi = ({ watchlist }) => {
                 </div>
 
                 <div className="add-watchlist text-center w-full bg-[#2C2C2C] p-1 rounded-full hover:bg-[#30353C]">
-                    {isAuth ? (
-                        <Link
-                            onClick={() => handleAddWatchlist(movie.id)}
-                            className="text-blue-500 flex items-center justify-around"
-                        >
-                            Add To Watchlist
-                            <IoAddOutline className="text-2xl font" />
-                        </Link>
-                    ) : (
-                        <Link
-                            href={route('sign_up_page')}
-                            className="text-blue-500 flex items-center justify-around"
-                        >
-                            Add To Watchlist
-                            <IoAddOutline className="text-2xl font" />
-                        </Link>
-                    )}
+                    <Link
+                        onClick={(e) => handleRemoveWatchlist(e, movie.id)}
+                        className="text-blue-500 flex items-center justify-around"
+                    >
+                        Remove
+                        <IoAddOutline className="text-2xl font" />
+                    </Link>
+                    
                 </div>
 
                 <div className="more-info">
