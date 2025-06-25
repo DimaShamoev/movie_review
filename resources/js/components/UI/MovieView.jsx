@@ -1,15 +1,22 @@
 import { useForm } from "@inertiajs/react"
-import { BiLike } from "react-icons/bi"
+import { BiLike, BiSolidLike } from "react-icons/bi"
 import { FaCommentAlt } from "react-icons/fa"
 import { PiImageBrokenBold } from "react-icons/pi"
 
 const MovieView = ({ movie, comments, likes }) => {
 
-    const { post } = useForm()
+    const { post, delete: remove } = useForm()
+
+    const isLiked = !!movie.user_like
 
     const handleMovieLike = (event, movie_id) => {
         event.preventDefault()
         post(route('like_movie', movie_id))
+    }
+
+    const handleMovieUnlike = (event, movie_id) => {
+        event.preventDefault()
+        remove(route('unlike_movie', movie_id))
     }
 
     const images = JSON.parse(movie.movie_cover_image || '[]');
@@ -37,19 +44,24 @@ const MovieView = ({ movie, comments, likes }) => {
 
             </div>
 
+
             <div className="reactions-section flex items-center gap-5">
                 <div className="likes-btn">
-                    <form
-                        onSubmit={(e) => handleMovieLike(e, movie.id)}
-                        className="flex items-center gap-1.5"
-                    >
-                        <button type="submit">
-                            <BiLike
-                                className="text-2xl"
-                            />
-                        </button>
-                        <span>{likes.length}</span>
-                    </form>
+                    {isLiked ? (
+                        <form onSubmit={(e) => handleMovieUnlike(e, movie.id)} className="flex items-center gap-1.5">
+                            <button type="submit" className="cursor-pointer">
+                                <BiSolidLike className="text-2xl" />
+                            </button>
+                            <span>{likes.length}</span>
+                        </form>
+                    ) : (
+                        <form onSubmit={(e) => handleMovieLike(e, movie.id)} className="flex items-center gap-1.5">
+                            <button type="submit" className="cursor-pointer">
+                                <BiLike className="text-2xl" />
+                            </button>
+                            <span>{likes.length}</span>
+                        </form>
+                    )}
                 </div>
 
                 <div className="comments-block flex items-center gap-1.5">

@@ -4,6 +4,7 @@ import { IoAddOutline } from "react-icons/io5"
 import { Link, useForm } from "@inertiajs/react"
 import { useAuth } from '../../hooks/useAuth'
 import { route } from "ziggy-js";
+import { FiMinus } from "react-icons/fi";
 
 const MovieCard = ({ movie }) => {
 
@@ -53,15 +54,15 @@ const MovieCard = ({ movie }) => {
                                 {isWatchlisted ? (
                                     <button
                                         onClick={(e) => handleRemoveWatchlist(e, movie.id)}
-                                        className="text-blue-500 flex items-center justify-around"
+                                        className="text-blue-500 flex items-center justify-around w-full"
                                     >
                                         Remove
-                                        <IoAddOutline className="text-2xl font" />
+                                        <FiMinus className="text-2xl font" />
                                     </button>
                                 ) : (
                                     <button
                                         onClick={(e) => handleAddWatchlist(e, movie.id)}
-                                        className="text-blue-500 flex items-center justify-around"
+                                        className="text-blue-500 flex items-center justify-around w-full"
                                     >
                                         Add To Watchlist
                                         <IoAddOutline className="text-2xl font" />

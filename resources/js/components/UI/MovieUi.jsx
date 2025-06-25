@@ -1,13 +1,12 @@
 import { IoMdInformationCircleOutline } from "react-icons/io";
-import { IoAddOutline } from "react-icons/io5";
 
 import { Link, useForm } from "@inertiajs/react";
 import { useAuth } from '../../hooks/useAuth'
 import { route } from "ziggy-js";
+import { FiMinus } from "react-icons/fi";
 
 const MovieUi = ({ watchlist }) => {
 
-    const { isAuth } = useAuth()
     const { delete: remove } = useForm()
 
     const movie = watchlist.movie;
@@ -47,10 +46,10 @@ const MovieUi = ({ watchlist }) => {
                 <div className="add-watchlist text-center w-full bg-[#2C2C2C] p-1 rounded-full hover:bg-[#30353C]">
                     <Link
                         onClick={(e) => handleRemoveWatchlist(e, movie.id)}
-                        className="text-blue-500 flex items-center justify-around"
+                        className="text-blue-500 flex items-center justify-around w-full"
                     >
                         Remove
-                        <IoAddOutline className="text-2xl font" />
+                        <FiMinus className="text-2xl font" />
                     </Link>
                     
                 </div>

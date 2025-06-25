@@ -45,24 +45,32 @@ class MoviesController
         return redirect('/');
     }
 
-    public function movieInfo($id)
-    {
-        $movie = Movie::find($id);
-        $comments = Comment::where('movie_id', $id)->with('user')->get();
-        $likes = Like::where('movie_id', $id)->with('user')->get();
+    public function movieInfo($id) {
+        $user = Auth::user();
 
-        $commentIds = Comment::where('movie_id', $id)->pluck('id');
+        $movie = Movie::with('likes')->findOrFail($id);
+
+        $movie->user_like = $user
+            ? $movie->likes->firstWhere('user_id', $user->id)
+            : null;
+
+        $comments = Comment::where('movie_id', $id)->with('user')->get();
+
+        $commentIds = $comments->pluck('id');
         $commentLikes = LikeComment::whereIn('comment_id', $commentIds)
-        ->with('user')
-        ->get();
+            ->with('user')
+            ->get();
+
+        $likes = $movie->likes;
 
         return Inertia::render('MovieInfo', [
             'movie' => $movie,
             'comments' => $comments,
             'likes' => $likes,
-            'commentLikes' => $commentLikes
+            'commentLikes' => $commentLikes,
         ]);
     }
+
 
     public function movieComment(Request $request, $movie_id)
     {
@@ -79,6 +87,14 @@ class MoviesController
         return redirect()->back();
     }
 
+    public function removeComment($comment_id) {
+        $comment = Comment::findOrFail($comment_id);
+
+        $comment->delete();
+
+        return redirect()->back();
+    }
+
     public function movieLike($movie_id) {
         $user = Auth::user();
 
@@ -89,11 +105,19 @@ class MoviesController
                 'user_id' => $user->id,
                 'movie_id' => $movie_id
             ]);
-        } else {
-            $likeExist->delete();
         }
 
         return;
+    }
+
+    public function movieUnlike($movie_id) {
+        $user = Auth::user();
+        $likeExist = Like::where('user_id', $user->id)->where('movie_id', $movie_id)->first();
+    
+        if ($likeExist) {
+            $likeExist->delete();
+        }
+    
     }
 
 
