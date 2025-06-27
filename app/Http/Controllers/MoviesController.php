@@ -58,7 +58,7 @@ class MoviesController
     public function movieInfo($id) {
         $user = Auth::user();
 
-        $movie = Movie::with('likes')->findOrFail($id);
+        $movie = Movie::with(['likes', 'actors'])->findOrFail($id);
 
         $movie->user_like = $user
             ? $movie->likes->firstWhere('user_id', $user->id)
@@ -78,6 +78,7 @@ class MoviesController
             'comments' => $comments,
             'likes' => $likes,
             'commentLikes' => $commentLikes,
+            'actors' => $movie->actors
         ]);
     }
 

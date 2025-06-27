@@ -81,7 +81,7 @@ const Aside = () => {
                                 <IoPeopleSharp
                                     className="text-2xl"
                                 />
-                                <span className="text-xl">Celebs</span>
+                                <span className="text-xl">Actors</span>
                             </Link>
                         </li>
                         <li>
