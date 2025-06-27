@@ -120,7 +120,7 @@ const Aside = () => {
                                         <BsStars
                                             className="text-2xl"
                                         />
-                                        <span className="text-xl">Add Movie</span>
+                                        <span className="text-xl">Add Actor</span>
                                     </Link>
                                 </li>
                             </>

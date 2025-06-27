@@ -133,7 +133,7 @@ const AddMovie = ({ actors }) => {
                     <button
                         type="button"
                         onClick={addActorSelect}
-                        className="bg-blue-500 text-white rounded p-1 w-fit"
+                        className="text-white rounded p-1 w-fit text-xs cursor-pointer"
                     >
                         + Add Actor
                     </button>
