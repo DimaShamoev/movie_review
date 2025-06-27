@@ -1,8 +1,11 @@
+import ActorsList from "../components/UI/ActorsList";
 import CommentInput from "../components/UI/CommentInput";
 import CommentList from "../components/UI/CommentList";
 import MovieView from "../components/UI/MovieView";
 
-const MovieInfo = ({ movie, comments, likes, commentLikes }) => {
+const MovieInfo = ({ movie, comments, likes, commentLikes, actors }) => {
+
+    console.log(actors)
     
 
     return (
@@ -15,7 +18,10 @@ const MovieInfo = ({ movie, comments, likes, commentLikes }) => {
                     comments={comments}
                     likes={likes} 
                 />
+
+                <ActorsList actors={actors} />
                 
+                <hr className="border-gray-400/50" />
 
                 <div className="comments-section flex flex-col gap-3.5">
                     <CommentInput movie={movie} />

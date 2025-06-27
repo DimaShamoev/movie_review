@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\LikeComment;
@@ -14,23 +15,24 @@ use Log;
 class MoviesController
 {
 
-    public function showAddPage()
-    {
-        return inertia('AddMovie');
+    public function showAddPage() {
+        $actors = Actor::all();
+        return inertia('AddMovie', ['actors' => $actors]);
     }
 
-    public function createMovie(Request $request)
-    {
+    public function createMovie(Request $request) {
 
         $validated = $request->validate([
-        'movie_title' => 'required|string|max:255',
-        'movie_description' => 'required|string',
-        'movie_duration' => 'required|integer|min:1',
-        'movie_director' => 'required|string|max:255',
-        'movie_cover_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
-        'movie_release_date' => 'required|date',
-        'trailer_link' => 'nullable|url|max:255',
-    ]);
+            'movie_title' => 'required|string|max:255',
+            'movie_description' => 'required|string',
+            'movie_duration' => 'required|integer|min:1',
+            'movie_director' => 'required|string|max:255',
+            'movie_cover_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'movie_release_date' => 'required|date',
+            'trailer_link' => 'nullable|url|max:255',
+            'actors' => 'required|array|min:1',
+            'actors.*' => 'exists:actors,id',
+        ]);
 
         $imagePaths = [];
 
@@ -51,6 +53,7 @@ class MoviesController
             'trailer_link' => $validated['trailer_link'],
         ]);
 
+        $movie->actors()->attach($validated['actors']);
 
         return redirect('/');
     }

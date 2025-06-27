@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MoviesController;
@@ -42,3 +43,7 @@ Route::delete('/movie/unlike/{movie_id}', [MoviesController::class, 'movieUnlike
 Route::post('/movie/comment/create/{movie_id}', [MoviesController::class, 'movieComment'])->name('movie_comment');
 Route::post('/movie/comment/like/{comment_id}', [MoviesController::class, 'commentLike'])->name('like_comment');
 Route::delete('/movie/comment/delete/{comment_id}', [MoviesController::class, 'removeComment'])->name('remove_comment');
+
+// actors
+Route::get('/actors/add-form', [ActorsController::class, 'actorsAddPage'])->name('add_actor_form');
+Route::post('/actors/add', [ActorsController::class, 'storeActor'])->name('add-actor');

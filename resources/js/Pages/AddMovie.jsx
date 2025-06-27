@@ -1,17 +1,21 @@
 import { Link, useForm } from '@inertiajs/react'
 import { useAuth } from '../hooks/useAuth'
 import { route } from 'ziggy-js'
+import { useState } from 'react'
 
-const AddMovie = () => {
+const AddMovie = ({ actors }) => {
 
-    const { setData, errors, processing, post } = useForm({
+    const [selectCount, setSelectCount] = useState(1)
+
+    const { data, setData, errors, processing, post } = useForm({
         movie_title: "",
         movie_description: "",
         movie_duration: "",
         movie_director: "",
         movie_cover_image: [],
         movie_release_date: "",
-        trailer_link: ""
+        trailer_link: "",
+        actors: []
     })
 
     const { isAuth, user } = useAuth()
@@ -26,6 +30,17 @@ const AddMovie = () => {
         post(route('post_movie'), {
             forceFormData: true
         })
+    }
+
+    const handleActorSelect = (index, e) => {
+        const selected = e.target.value
+        const updated = [...data.actors]
+        updated[index] = selected
+        setData('actors', updated)
+    }
+
+    const addActorSelect = () => {
+        setSelectCount(prev => prev + 1)
     }
 
     return (
@@ -99,6 +114,30 @@ const AddMovie = () => {
                         onChange={(e) => setData('movie_release_date', e.target.value)}
                     />
                     {errors.movie_release_date && <div className="text-red-600 text-xs">{errors.movie_release_date}</div>}
+                </div>
+                <div className="select-div flex flex-col gap-2">
+                    {Array.from({ length: selectCount }).map((_, idx) => (
+                        <select
+                            key={idx}
+                            className="border-2 w-full p-1 outline-none rounded-sm"
+                            onChange={(e) => handleActorSelect(idx, e)}
+                        >
+                            <option value="">Select Actor</option>
+                            {actors.map(actor => (
+                                <option key={actor.id} value={actor.id}>
+                                    {actor.actor_name}
+                                </option>
+                            ))}
+                        </select>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={addActorSelect}
+                        className="bg-blue-500 text-white rounded p-1 w-fit"
+                    >
+                        + Add Actor
+                    </button>
+                    {errors.actors && <div className="text-red-600 text-xs">{errors.actors}</div>}
                 </div>
                 <div className="input-block input-user-info max-w-[600px] w-full flex items-center cursor-pointer">
                     <label htmlFor="movie_cover" className='max-w-[100px] w-full h-full border-2 p-1 border-r-0 rounded-l-md'>Upload File</label>

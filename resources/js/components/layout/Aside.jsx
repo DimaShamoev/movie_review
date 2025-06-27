@@ -9,6 +9,7 @@ import { Link } from "@inertiajs/react";
 import { useAside } from "../../hooks/useAside";
 import { route } from "ziggy-js";
 import { useAuth } from "../../hooks/useAuth";
+import { BsStars } from "react-icons/bs";
 
 const Aside = () => {
 
@@ -97,18 +98,33 @@ const Aside = () => {
                             </Link>
                         </li>
                         {isAuth && isAdmin && (
-                            <li>
-                                <Link
-                                    href={route('add_movie_page')}
-                                    className="flex items-center transition-colors duration-200 ease-linear gap-1.5 hover:bg-black hover:text-white p-1 rounded-md"
-                                    onClick={toggleMenu}
-                                >
-                                    <MdLibraryAdd
-                                        className="text-2xl"
-                                    />
-                                    <span className="text-xl">Add Movie</span>
-                                </Link>
-                            </li>
+                            <>
+                                <li>
+                                    <Link
+                                        href={route('add_movie_page')}
+                                        className="flex items-center transition-colors duration-200 ease-linear gap-1.5 hover:bg-black hover:text-white p-1 rounded-md"
+                                        onClick={toggleMenu}
+                                        >
+                                        <MdLibraryAdd
+                                            className="text-2xl"
+                                            />
+                                        <span className="text-xl">Add Movie</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href={route('add_actor_form')}
+                                        className="flex items-center transition-colors duration-200 ease-linear gap-1.5 hover:bg-black hover:text-white p-1 rounded-md"
+                                        onClick={toggleMenu}
+                                    >
+                                        <BsStars
+                                            className="text-2xl"
+                                        />
+                                        <span className="text-xl">Add Movie</span>
+                                    </Link>
+                                </li>
+                            </>
+                            
                         )}
                     </ul>
                 </div>
